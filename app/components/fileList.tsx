@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import Image from "next/image";
 
 export default function FileList({
   item,
@@ -18,16 +19,23 @@ export default function FileList({
     }
   };
 
+  const imageLoader = () => {
+    return `${item.imageURL}`;
+  };
+
   return (
     <div className="w-full px-[14px] py-[10px] flex justify-between cursor-pointer items-center hover:bg-[rgba(125,211,252,0.2)]">
       <div
         className="self-center w-[95%] flex gap-2 items-center"
         onDoubleClick={() => window.open(item.link, "_blank")}
       >
-        <img
+        <Image
+          loader={imageLoader}
+          width={24}
+          height={24}
           src={item.imageURL}
-          alt=""
-          className="rounded-[50%] object-cover w-6 h-6"
+          alt="File"
+          className=" rounded-[50%]"
         />
 
         <p className="text-sm font-semibold text-[rgba(0,0,0,0.8)]">

@@ -1,5 +1,4 @@
 import { Client, Account, Databases, Storage } from "appwrite";
-import { v4 as uuidV4 } from "uuid";
 
 const client = new Client();
 
@@ -26,7 +25,7 @@ export const creatingFolder = async (name: string, path: string) => {
   await databases.createDocument(
     "64748082e458885cc1dd",
     "64748089ef99c41ad0b2",
-    uuidV4(),
+    crypto.randomUUID(),
     { folder: [name, path] }
   );
 };
