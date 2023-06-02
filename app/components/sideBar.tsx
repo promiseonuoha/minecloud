@@ -10,6 +10,7 @@ export default function SideBar() {
   const checkPath = (path: any) => {
     let value = true;
     if (path === "/contact&" && pathname === "/contact&") return value;
+    if (path === "/favourite&" && pathname === "/favourite&") return value;
     if (path === "/" && pathname !== "/contact&" && pathname !== "/favourite&")
       return value;
   };
