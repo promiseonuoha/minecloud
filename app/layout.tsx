@@ -27,7 +27,6 @@ export default function RootLayout({
       (res) => {
         setIsLoggedIn(true);
         setUserDetails(res);
-        console.log(userDetails);
       },
       (err) => console.log(err)
     );
