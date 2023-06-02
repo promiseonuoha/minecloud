@@ -27,6 +27,7 @@ export default function RootLayout({
       (res) => {
         setIsLoggedIn(true);
         setUserDetails(res);
+        console.log(userDetails);
       },
       (err) => console.log(err)
     );
@@ -54,11 +55,12 @@ export default function RootLayout({
               </p>
               <div className="pt-2">
                 <button
+                  className=" text-xs px-8 py-2 border-none bg-blue-700 text-white"
                   onClick={() => {
                     account.createOAuth2Session(
                       "google",
-                      "https://localhost:3000/",
-                      "https://localhost:3000/"
+                      "https://minecloud.vercel.app/",
+                      "https://minecloud.vercel.app/"
                     );
                   }}
                 >
