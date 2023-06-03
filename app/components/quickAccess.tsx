@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 
-export default function QuickAccess({ changed, created }: any) {
+export default function QuickAccess({ changed, email }: any) {
   const [allFolders, setAllFolders]: any = useState(null);
 
   const listFolders = () => {
@@ -17,7 +17,9 @@ export default function QuickAccess({ changed, created }: any) {
     promise.then(
       (response: any) =>
         setAllFolders(
-          response.documents.filter((item: any) => item.folder[1] === "/")
+          response.documents.filter(
+            (item: any) => item.folder[1] === "/" && item.folder[2] === email
+          )
         ),
       (err: any) => console.log(err)
     );

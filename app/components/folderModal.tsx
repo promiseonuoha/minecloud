@@ -1,10 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { databases } from "../appwrite/appwriteConfig";
+import { account, databases } from "../appwrite/appwriteConfig";
 import { useState, useEffect } from "react";
 
 export default function FolderModal({ createFolder, canceled }: any) {
   const [folderName, setFolderName] = useState("");
+  const [userDetails, setUserDetails]: any = useState(null);
   const [error, setError]: any = useState("");
   const invalidCharacters = "!@#$%^&*()";
   const [sibilings, setSiblings]: any = useState([]);
@@ -52,6 +53,12 @@ export default function FolderModal({ createFolder, canceled }: any) {
     setTimeout(() => {
       setTransform("translateY(0px)");
     }, 300);
+
+    const promise = account.get();
+    promise.then(
+      (res) => setUserDetails(res),
+      (err) => console.log(err)
+    );
   }, []);
 
   useEffect(() => {
@@ -62,11 +69,15 @@ export default function FolderModal({ createFolder, canceled }: any) {
     promise.then(
       (response) =>
         setSiblings(
-          response.documents.filter((item) => item.folder[1] === pathname)
+          response.documents.filter(
+            (item) =>
+              item.folder[1] === pathname &&
+              item.folder[2] === userDetails.email
+          )
         ),
       (err) => console.log(err)
     );
-  }, [pathname]);
+  }, [pathname, userDetails.email]);
 
   return (
     <div className="w-full z-50 h-screen absolute top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,0.1)]">

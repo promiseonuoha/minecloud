@@ -4,13 +4,14 @@ import Loading from "@/app/components/loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import QuickAccess from "@/app/components/quickAccess";
-import { databases, storage } from "@/app/appwrite/appwriteConfig";
+import { databases, storage, account } from "@/app/appwrite/appwriteConfig";
 import FileList from "@/app/components/fileList";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles]: any = useState([]);
   const [documents, setDocuments]: any = useState();
+  const [userDetails, setUserDetails]: any = useState(null);
 
   const listDocuments = () => {
     const promise = databases.listDocuments(
@@ -19,7 +20,11 @@ export default function Page() {
     );
     promise.then(
       (res) => {
-        setDocuments(res.documents.filter((v: any) => v.file[3] === "Yes"));
+        setDocuments(
+          res.documents.filter(
+            (v: any) => v.file[3] === "Yes" && v.file[4] === userDetails.email
+          )
+        );
         setLoading(false);
       },
       (err) => {
@@ -30,8 +35,16 @@ export default function Page() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    listDocuments();
+    const promise = account.get();
+
+    promise.then(
+      (res) => {
+        setUserDetails(res);
+        listDocuments();
+        setLoading(true);
+      },
+      (err) => console.log(err)
+    );
   }, []);
 
   useEffect(() => {
@@ -45,7 +58,9 @@ export default function Page() {
             id: item.file[0],
             imageURL: storage.getFilePreview(
               "64748172a5b0bd8409dd",
-              item.file[0]
+              item.file[0],
+              25,
+              25
             ).href,
             link: storage.getFileView("64748172a5b0bd8409dd", item.file[0])
               .href,

@@ -23,7 +23,6 @@ import Signin from "./signIn";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn]: any = useState(true);
-  const [userDetails, setUserDetails]: any = useState();
   const [fileDropDown, setFileDropDown] = useState(false);
   const [folderDropDown, setFolderDropDown] = useState(false);
   const [folders, setFolders]: any = useState(null);
@@ -31,22 +30,24 @@ export default function Home() {
   const [files, setFiles]: any = useState([]);
   const [loading, setLoading] = useState(false);
   const [changed, setChanged]: any = useState(0);
+  const [userDetails, setUserDetails]: any = useState();
   const pathname = usePathname();
 
-  const listDocuments = () => {
+  const listDocuments = (email: string) => {
     const promise = databases.listDocuments(
       "64748082e458885cc1dd",
       "64748089ef99c41ad0b2"
     );
-
     promise.then(
       (res) => {
         setFolders(
-          res.documents.filter((item: any) => item.folder[1] === pathname)
+          res.documents.filter((item: any) => {
+            return item.folder[1] === pathname && item.folder[2] === email;
+          })
         );
         setIds(
           res.documents.filter((v) => {
-            return v.file[2] === pathname;
+            return v.file[2] === pathname && v.file[4] === email;
           })
         );
         setChanged(Math.random());
@@ -66,7 +67,7 @@ export default function Home() {
     promise.then(
       () =>
         deleteDocument(id).then(
-          () => listDocuments(),
+          () => listDocuments(userDetails.email),
           (err) => console.log(err)
         ),
       (err) => console.log(err)
@@ -113,10 +114,15 @@ export default function Home() {
         (res) => {
           folders = res.documents.filter(
             (item: any) =>
-              item.folder.length && item.folder[1].indexOf(path) !== -1
+              item.folder.length &&
+              item.folder[2] === userDetails.email &&
+              item.folder[1].indexOf(path) !== -1
           );
           files = res.documents.filter(
-            (item: any) => item.file.length && item.file[2].indexOf(path) !== -1
+            (item: any) =>
+              item.file.length &&
+              item.file[4] === userDetails.email &&
+              item.file[2].indexOf(path) !== -1
           );
         },
         (err) => {
@@ -129,7 +135,7 @@ export default function Home() {
             .deleteDocument("64748082e458885cc1dd", "64748089ef99c41ad0b2", id)
             .then(
               () => {
-                listDocuments();
+                listDocuments(userDetails.email);
                 setLoading(false);
               },
               (err) => console.log(err)
@@ -145,8 +151,14 @@ export default function Home() {
     path: string
   ) => {
     setLoading(true);
-    updateDocument(id, name, path, `${type === "No" ? "Yes" : "No"}`).then(
-      () => listDocuments(),
+    updateDocument(
+      id,
+      name,
+      path,
+      `${type === "No" ? "Yes" : "No"}`,
+      userDetails.email
+    ).then(
+      () => listDocuments(userDetails.email),
       (err) => {
         console.log(err);
         setLoading(false);
@@ -155,15 +167,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const getAccount = account.get();
-
-    getAccount.then(
+    const promise = account.get();
+    promise.then(
       (res) => {
         setIsLoggedIn(true);
-        setLoading(true);
-        listDocuments();
         setUserDetails(res);
-        console.log(res);
+        setLoading(true);
+        listDocuments(res.email);
       },
       (err) => {
         console.log(err);
@@ -183,7 +193,9 @@ export default function Home() {
             id: item.file[0],
             imageURL: storage.getFilePreview(
               "64748172a5b0bd8409dd",
-              item.file[0]
+              item.file[0],
+              25,
+              25
             ).href,
             link: storage.getFileView("64748172a5b0bd8409dd", item.file[0])
               .href,
@@ -201,10 +213,10 @@ export default function Home() {
           createFolder={(name: string) => {
             setFolderDropDown(false);
             setLoading(true);
-            creatingFolder(name, pathname).then(
+            creatingFolder(name, pathname, userDetails.email).then(
               () => {
                 setLoading(false);
-                listDocuments();
+                listDocuments(userDetails.email);
                 setChanged(Math.random());
               },
               () => setLoading(false)
@@ -220,7 +232,9 @@ export default function Home() {
             <p className="text-sm text-[rgba(0,0,0,0.9)] font-semibold">
               Quick Access
             </p>
-            <QuickAccess changed={changed} />
+            {userDetails && (
+              <QuickAccess changed={changed} email={userDetails.email} />
+            )}
           </div>
           <div className="bg-white w-full rounded-[6px] border border-solid border-[rgba(0,0,0,0.1)] row-span-2 pt-[14px]">
             <div className="">
@@ -241,8 +255,8 @@ export default function Home() {
                     <FileModal
                       choosedFile={(id: string, name: string) => {
                         setFileDropDown(false);
-                        addFile(id, name, pathname).then(
-                          () => listDocuments(),
+                        addFile(id, name, pathname, userDetails.email).then(
+                          () => listDocuments(userDetails.email),
                           (err) => console.log(err)
                         );
                       }}

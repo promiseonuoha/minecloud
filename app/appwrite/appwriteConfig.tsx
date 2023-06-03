@@ -12,21 +12,30 @@ client
 
 export const account = new Account(client);
 
-export const addFile = async (id: string, name: string, path: string) => {
+export const addFile = async (
+  id: string,
+  name: string,
+  path: string,
+  email: string
+) => {
   await databases.createDocument(
     "64748082e458885cc1dd",
     "64748089ef99c41ad0b2",
     id,
-    { file: [id, name, path, "No"] }
+    { file: [id, name, path, "No", email] }
   );
 };
 
-export const creatingFolder = async (name: string, path: string) => {
+export const creatingFolder = async (
+  name: string,
+  path: string,
+  email: string
+) => {
   await databases.createDocument(
     "64748082e458885cc1dd",
     "64748089ef99c41ad0b2",
     crypto.randomUUID(),
-    { folder: [name, path] }
+    { folder: [name, path, email] }
   );
 };
 
@@ -42,12 +51,13 @@ export const updateDocument = async (
   id: string,
   name: string,
   path: string,
-  isFavourite: string
+  isFavourite: string,
+  email: string
 ) => {
   await databases.updateDocument(
     "64748082e458885cc1dd",
     "64748089ef99c41ad0b2",
     id,
-    { file: [id, name, path, isFavourite] }
+    { file: [id, name, path, isFavourite, email] }
   );
 };

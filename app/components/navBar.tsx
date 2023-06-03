@@ -2,18 +2,29 @@
 import Logo from "./logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { navLinks } from "./data";
+import { account } from "../appwrite/appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const [userDetails, setUserDetails]: any = useState(null);
 
   const checkPath = (path: any) => {
     let value = true;
     if (path === "/contact&" && pathname === "/contact&") return value;
     if (path === "/" && pathname !== "/contact&") return value;
   };
+
+  useEffect(() => {
+    const promise = account.get();
+    promise.then(
+      (res) => setUserDetails(res),
+      (err) => console.log(err)
+    );
+  }, []);
 
   return (
     <nav className="w-full flex justify-between items-center">
@@ -66,7 +77,11 @@ export default function NavBar() {
           </div>
         </div>
 
-        <div className="self-center w-[40px] h-[40px] rounded-[20px] cursor-pointer bg-no-repeat bg-cover bg-user"></div>
+        {userDetails && (
+          <div className="self-center w-[35px] h-[35px] rounded-[50%] cursor-pointer bg-red-300 flex justify-center items-center text-white font-medium text-base">
+            {userDetails.email[0].toUpperCase()}
+          </div>
+        )}
       </div>
     </nav>
   );
