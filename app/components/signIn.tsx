@@ -8,7 +8,7 @@ export default function Signin() {
   const [route, setRoute] = useState("SignIn");
   const [left, setLeft] = useState("8.5px");
   const [errorMessage, setErrorMessage] = useState("");
-  const [border, setBorder] = useState("1px solid rgba(0,0,0,0.3)");
+  const [border, setBorder] = useState("1px solid rgba(0,0,0,0.8)");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
@@ -47,7 +47,7 @@ export default function Signin() {
   };
 
   useEffect(() => {
-    setBorder("1px solid rgba(0,0,0,0.3)");
+    setBorder("1px solid rgba(0,0,0,0.8)");
     setErrorMessage("");
   }, [emailValue, passwordValue]);
 
@@ -57,7 +57,7 @@ export default function Signin() {
     setEmailValue("");
     setPasswordValue("");
     setNameValue("");
-    setBorder("1px solid rgba(0,0,0,0.3");
+    setBorder("1px solid rgba(0,0,0,0.8");
   }, [route]);
 
   const UserEmail = (
@@ -119,23 +119,17 @@ export default function Signin() {
             style={{
               left: left,
             }}
-            className="w-5/12 bg-[rgba(0,0,0,0.3)] h-[26px] -top-1 z-10 rounded absolute left-0  "
+            className="w-5/12 bg-[rgba(0,0,0,0.8)] h-[1px] rounded absolute left-0  "
           ></div>
           <p
-            style={{
-              color: `${route === "SignIn" ? "White" : "rgba(0,0,0,0.8)"}`,
-            }}
             onClick={() => setRoute("SignIn")}
-            className="text-[13px]   w-6/12 text-center z-20 font-medium cursor-pointer"
+            className="text-[13px] text-[rgba(0,0,0,0.8)]   w-6/12 text-center font-medium cursor-pointer"
           >
             SignIn
           </p>
           <p
-            style={{
-              color: `${route === "SignUp" ? "White" : "rgba(0,0,0,0.8)"}`,
-            }}
             onClick={() => setRoute("SignUp")}
-            className="text-[13px]  w-6/12 z-20  text-center font-medium cursor-pointer"
+            className="text-[13px] text-[rgba(0,0,0,0.8)]  w-6/12   text-center font-medium cursor-pointer"
           >
             SignUp
           </p>
@@ -155,7 +149,7 @@ export default function Signin() {
             <button
               onClick={handleLogin}
               type="submit"
-              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.3)] text-white"
+              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.8)] text-white"
             >
               SignIn
             </button>
@@ -177,13 +171,13 @@ export default function Signin() {
             <button
               onClick={handleSignUp}
               type="submit"
-              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.3)] text-white"
+              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.8)] text-white"
             >
               SignUp
             </button>
           </form>
         )}
-        <div className="pt-1 w-full border-t border-solid border-[rgba(0,0,0,0.1)] flex flex-col gap-1 items-start">
+        <div className="pt-1 w-full border-t border-solid border-[rgba(0,0,0,0.1)] flex flex-col gap-1 ">
           <p className="text-[13px] text-[rgba(0,0,0,0.5)] font-medium text-center">
             OR
           </p>
@@ -195,7 +189,7 @@ export default function Signin() {
                 "https://minecloud.vercel.app/"
               );
             }}
-            className="flex justify-center items-center text-[13px] text-white bg-[rgba(0,0,0,0.3)] gap-1  px-4 py-2 rounded"
+            className="flex justify-center items-center text-[13px] text-white bg-[rgba(0,0,0,0.8)] gap-1  px-4 py-2 rounded"
           >
             SignIn with google
             <Image

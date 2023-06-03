@@ -226,15 +226,14 @@ export default function Home() {
         />
       )}
       {loading && <Loading />}
-      {isLoggedIn ? (
+      {isLoggedIn && userDetails ? (
         <div className="w-full h-full grid grid-rows-3 grid-cols-1 gap-y-5">
           <div className="w-full border border-solid border-[rgba(0,0,0,0.1)] rounded-lg bg-white box-border p-[15px]">
             <p className="text-sm text-[rgba(0,0,0,0.9)] font-semibold">
               Quick Access
             </p>
-            {userDetails && (
-              <QuickAccess changed={changed} email={userDetails.email} />
-            )}
+
+            <QuickAccess changed={changed} email={userDetails.email} />
           </div>
           <div className="bg-white w-full rounded-[6px] border border-solid border-[rgba(0,0,0,0.1)] row-span-2 pt-[14px]">
             <div className="">
