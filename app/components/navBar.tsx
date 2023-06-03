@@ -39,9 +39,13 @@ export default function NavBar() {
             window.location.reload();
           } else {
             router.push("/");
+            setLoading(false);
           }
         },
-        (err) => console.log(err)
+        (err) => {
+          console.log(err);
+          setLoading(false);
+        }
       );
     }, 3000);
   };
