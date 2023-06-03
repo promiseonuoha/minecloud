@@ -162,6 +162,7 @@ export default function Home() {
         setLoading(true);
         listDocuments();
         setUserDetails(res);
+        console.log(userDetails);
       },
       (err) => {
         console.log(err);
