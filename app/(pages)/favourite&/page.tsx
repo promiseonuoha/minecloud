@@ -11,9 +11,9 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles]: any = useState([]);
   const [documents, setDocuments]: any = useState();
-  const [userDetails, setUserDetails]: any = useState(null);
+  const [email, setEmail]: any = useState();
 
-  const listDocuments = () => {
+  const listDocuments = (email: string) => {
     const promise = databases.listDocuments(
       "64748082e458885cc1dd",
       "64748089ef99c41ad0b2"
@@ -22,7 +22,7 @@ export default function Page() {
       (res) => {
         setDocuments(
           res.documents.filter(
-            (v: any) => v.file[3] === "Yes" && v.file[4] === userDetails.email
+            (v: any) => v.file[3] === "Yes" && v.file[4] === email
           )
         );
         setLoading(false);
@@ -39,8 +39,8 @@ export default function Page() {
 
     promise.then(
       (res) => {
-        setUserDetails(res);
-        listDocuments();
+        listDocuments(res.email);
+        setEmail(res.email);
         setLoading(true);
       },
       (err) => console.log(err)
@@ -79,7 +79,7 @@ export default function Page() {
           <p className="text-sm text-[rgba(0,0,0,0.9)] font-semibold">
             Quick Access
           </p>
-          <QuickAccess />
+          {email && <QuickAccess email={email} />}
         </div>
         <div className="bg-white w-full rounded-[6px] border border-solid border-[rgba(0,0,0,0.1)] row-span-2 pt-[14px]">
           <div className="px-[14px] items-center w-full border-b border-solid border-[rgba(0,0,0,0.1)] flex gap-[6px] pb-[10px]">
