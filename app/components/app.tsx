@@ -21,7 +21,7 @@ import FileList from "./fileList";
 import FolderList from "./folderList";
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn]: any = useState(false);
+  const [isLoggedIn, setIsLoggedIn]: any = useState(true);
   const [userDetails, setUserDetails]: any = useState();
   const [fileDropDown, setFileDropDown] = useState(false);
   const [folderDropDown, setFolderDropDown] = useState(false);
@@ -163,7 +163,10 @@ export default function Home() {
         listDocuments();
         setUserDetails(res);
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        setIsLoggedIn(false);
+      }
     );
   }, []);
 
