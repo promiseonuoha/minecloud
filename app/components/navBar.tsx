@@ -1,7 +1,7 @@
 "use client";
 import Logo from "./logo";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navLinks } from "./data";
 import { account } from "../appwrite/appwriteConfig";
@@ -16,6 +16,7 @@ import LogOutModal from "./logOutModal";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [userDetails, setUserDetails]: any = useState(null);
   const [clip, setClip] = useState("polygon(0 0, 100% 0, 100% 0, 0 0)");
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,13 @@ export default function NavBar() {
 
     setTimeout(() => {
       promise.then(
-        () => window.location.reload(),
+        () => {
+          if (pathname === "/") {
+            window.location.reload();
+          } else {
+            router.push("/");
+          }
+        },
         (err) => console.log(err)
       );
     }, 3000);
