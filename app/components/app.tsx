@@ -19,6 +19,7 @@ import { usePathname } from "next/navigation";
 import Loading from "./loading";
 import FileList from "./fileList";
 import FolderList from "./folderList";
+import Signin from "./signIn";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn]: any = useState(true);
@@ -162,7 +163,7 @@ export default function Home() {
         setLoading(true);
         listDocuments();
         setUserDetails(res);
-        console.log(userDetails);
+        console.log(res);
       },
       (err) => {
         console.log(err);
@@ -293,21 +294,7 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="w-screen h-screen absolute bg-[rgba(0,0,0,0.1)] top-0 left-0 flex justify-center items-center">
-          <div className="w-[330px] h-auto bg-white rounded border border-solid border-[rgba(0,0,0,0.1)] p-3">
-            <button
-              onClick={() => {
-                account.createOAuth2Session(
-                  "google",
-                  "https://minecloud.vercel.app/",
-                  "https://minecloud.vercel.app/"
-                );
-              }}
-            >
-              SignIn with google
-            </button>
-          </div>
-        </div>
+        <Signin />
       )}
     </>
   );
