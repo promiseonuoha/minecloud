@@ -8,7 +8,7 @@ export default function Signin() {
   const [route, setRoute] = useState("SignIn");
   const [left, setLeft] = useState("8.5px");
   const [errorMessage, setErrorMessage] = useState("");
-  const [border, setBorder] = useState("1px solid rgba(0,0,0,0.8)");
+  const [border, setBorder] = useState("1px solid rgba(0,0,0,0.1)");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
@@ -47,17 +47,19 @@ export default function Signin() {
   };
 
   useEffect(() => {
-    setBorder("1px solid rgba(0,0,0,0.8)");
+    setBorder("1px solid rgba(0,0,0,0.1)");
     setErrorMessage("");
   }, [emailValue, passwordValue]);
 
   useEffect(() => {
-    route === "SignIn" ? setLeft("8.5px") : setLeft("53%");
+    setTimeout(() => {
+      route === "SignIn" ? setLeft("8.5px") : setLeft("53%");
+    }, 50);
     setErrorMessage("");
     setEmailValue("");
     setPasswordValue("");
     setNameValue("");
-    setBorder("1px solid rgba(0,0,0,0.8");
+    setBorder("1px solid rgba(0,0,0,0.1");
   }, [route]);
 
   const UserEmail = (
@@ -110,7 +112,7 @@ export default function Signin() {
 
   return (
     <div className="w-screen h-screen absolute bg-[rgba(0,0,0,0.5)] top-0 left-0 flex justify-center items-center">
-      <div className="w-[330px] h-auto bg-white rounded border border-solid items-center border-[rgba(0,0,0,0.1)] py-4 px-5 flex flex-col">
+      <div className="w-[330px] h-[400px] bg-white rounded border border-solid items-center border-[rgba(0,0,0,0.1)] py-4 px-5 flex flex-col">
         <p className="text-[13px] text-[rgba(0,0,0,0.8)] font-medium pb-3">
           👋 Welcome, SignIn to use MineCloud
         </p>
@@ -119,7 +121,7 @@ export default function Signin() {
             style={{
               left: left,
             }}
-            className="w-5/12 bg-[rgba(0,0,0,0.8)] h-[1px] rounded absolute left-0  "
+            className="w-5/12 bg-[rgba(0,0,0,0.5)] h-[1px] rounded absolute bottom-1 duration-150  "
           ></div>
           <p
             onClick={() => setRoute("SignIn")}
@@ -149,7 +151,7 @@ export default function Signin() {
             <button
               onClick={handleLogin}
               type="submit"
-              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.8)] text-white"
+              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.6)] text-white"
             >
               SignIn
             </button>
@@ -171,7 +173,7 @@ export default function Signin() {
             <button
               onClick={handleSignUp}
               type="submit"
-              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.8)] text-white"
+              className="text-sm flex justify-center items-center w-full py-[6px] rounded border-none bg-[rgba(0,0,0,0.6)] text-white"
             >
               SignUp
             </button>
@@ -189,7 +191,7 @@ export default function Signin() {
                 "https://minecloud.vercel.app/"
               );
             }}
-            className="flex justify-center items-center text-[13px] text-white bg-[rgba(0,0,0,0.8)] gap-1  px-4 py-2 rounded"
+            className="flex justify-center items-center text-[13px] text-white bg-[rgba(0,0,0,0.6)] gap-1  px-4 py-2 rounded"
           >
             SignIn with google
             <Image
