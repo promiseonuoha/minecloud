@@ -223,6 +223,7 @@ export default function Home() {
             );
           }}
           canceled={() => setFolderDropDown(false)}
+          email={userDetails.email}
         />
       )}
       {loading && <Loading />}
