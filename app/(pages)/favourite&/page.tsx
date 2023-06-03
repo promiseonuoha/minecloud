@@ -35,15 +35,18 @@ export default function Page() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const promise = account.get();
 
     promise.then(
       (res) => {
         listDocuments(res.email);
         setEmail(res.email);
-        setLoading(true);
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        setLoading(false);
+      }
     );
   }, []);
 

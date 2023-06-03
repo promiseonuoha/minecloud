@@ -24,8 +24,7 @@
 #quickAccess::-webkit-scrollbar,
 #filesNavigator::-webkit-scrollbar,
 #fileView::-webkit-scrollbar,
-#favouriteFileView::-webkit-scrollbar,
-#signIn::-webkit-scrollbar {
+#favouriteFileView::-webkit-scrollbar {
   display: none;
 }
 

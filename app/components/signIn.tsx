@@ -112,10 +112,7 @@ export default function Signin() {
 
   return (
     <div className="w-screen h-screen absolute bg-[rgba(0,0,0,0.5)] top-0 left-0 flex justify-center items-center">
-      <div
-        id="signIn"
-        className="w-[330px] h-[385px] overflow-y-scroll bg-white rounded border border-solid items-center border-[rgba(0,0,0,0.1)] py-4 px-5 flex flex-col"
-      >
+      <div className="w-[330px] h-auto min-h-[360px]  bg-white rounded border border-solid items-center border-[rgba(0,0,0,0.1)] py-4 px-5 flex flex-col">
         <p className="text-[13px] text-[rgba(0,0,0,0.8)] font-medium pb-3">
           👋 Welcome, SignIn to use MineCloud
         </p>
