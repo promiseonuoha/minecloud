@@ -167,16 +167,17 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const promise = account.get();
     promise.then(
       (res) => {
         setIsLoggedIn(true);
         setUserDetails(res);
-        setLoading(true);
         listDocuments(res.email);
       },
       (err) => {
         console.log(err);
+        setLoading(false);
         setIsLoggedIn(false);
       }
     );
