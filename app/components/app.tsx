@@ -158,6 +158,7 @@ export default function Home() {
 
     getAccount.then(
       (res) => {
+        setIsLoggedIn(true);
         setLoading(true);
         listDocuments();
         setUserDetails(res);
