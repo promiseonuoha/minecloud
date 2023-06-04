@@ -31,14 +31,14 @@ export default function FileList({
       >
         <Image
           loader={imageLoader}
-          width={24}
-          height={24}
+          width={28}
+          height={28}
           src={item.imageURL}
           alt="File"
           className=" rounded-[50%]"
         />
 
-        <p className="text-sm font-semibold text-[rgba(0,0,0,0.8)]">
+        <p className="text-sm font-semibold w-[75%] overflow-x-hidden text-[rgba(0,0,0,0.8)]">
           {item.name}
         </p>
       </div>

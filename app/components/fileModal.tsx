@@ -35,7 +35,7 @@ export default function FileModal({
   return (
     <div
       style={{ opacity: opacity, transform: transform }}
-      className="absolute duration-700 top-10 z-50 shadow-[0px_0px_1px_rgba(0,0,0,0.1)] bg-white rounded right-0 flex flex-col gap-1 w-[160px] border border-solid border-[rgba(0,0,0,0.1)]"
+      className="absolute duration-700 top-10 z-40 shadow-[0px_0px_1px_rgba(0,0,0,0.1)] bg-white rounded right-0 flex flex-col gap-1 w-[160px] border border-solid border-[rgba(0,0,0,0.1)]"
     >
       <div className="relative">
         <button

@@ -62,8 +62,8 @@ export default function Page() {
             imageURL: storage.getFilePreview(
               "64748172a5b0bd8409dd",
               item.file[0],
-              25,
-              25
+              28,
+              28
             ).href,
             link: storage.getFileView("64748172a5b0bd8409dd", item.file[0])
               .href,
