@@ -269,6 +269,10 @@ export default function Home() {
                           setFolderDropDown(true);
                         }}
                         loading={() => setLoading(true)}
+                        stopLoading={() => {
+                          setLoading(false);
+                          alert("Error Adding File");
+                        }}
                       />
                     )}
                   </div>

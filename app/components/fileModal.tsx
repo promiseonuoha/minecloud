@@ -8,6 +8,7 @@ export default function FileModal({
   choosedFile,
   choosedFolder,
   loading,
+  stopLoading,
 }: any) {
   const [bg, setBg] = useState("transparent");
   const [opacity, setOpacity] = useState(0);
@@ -23,7 +24,7 @@ export default function FileModal({
       (res) => {
         choosedFile(res.$id, res.name);
       },
-      (err) => console.log(err)
+      () => stopLoading()
     );
   };
 
