@@ -14,6 +14,7 @@ import {
 import { faHeart, faAddressBook } from "@fortawesome/free-regular-svg-icons";
 import Loading from "./loading";
 import LogOutModal from "./logOutModal";
+import Search from "./search";
 
 export default function NavBar({ onClick }: any) {
   const pathname = usePathname();
@@ -22,6 +23,8 @@ export default function NavBar({ onClick }: any) {
   const [clip, setClip] = useState("polygon(0 0, 100% 0, 100% 0, 0 0)");
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [focused, setFocused] = useState(false);
 
   const checkPath = (path: any) => {
     let value = true;
@@ -123,22 +126,33 @@ export default function NavBar({ onClick }: any) {
           </div>
         </div>
         <div className="flex gap-4 items-center self-center">
-          <div className="w-[210px] h-[35px] bg-white rounded cursor-pointer flex">
-            <div className="w-9 h-[35px] rounded flex justify-center items-center">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="w-4 h-3 text-[rgba(0,0,0,0.8)]"
-              />
-            </div>
-            <div className="relative">
+          <div className="relative">
+            <div className="w-[210px] h-[35px] bg-white rounded cursor-pointer flex">
+              <div className="w-9 h-[35px] rounded flex justify-center items-center">
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  className="w-4 h-3 text-[rgba(0,0,0,0.8)]"
+                />
+              </div>
+
               <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 type="text"
                 className="w-[174px] h-[35px] border-none outline-none rounded bg-white text-[rgba(0,0,0,0.8)] text-sm"
                 placeholder="Search anything..."
+                onFocus={() => setFocused(true)}
+                onBlur={() => {
+                  setTimeout(() => {
+                    setFocused(false);
+                  }, 250);
+                }}
               />
             </div>
+            {focused && (
+              <Search value={searchValue} email={userDetails.email} />
+            )}
           </div>
-
           {userDetails && (
             <div className="relative">
               <div

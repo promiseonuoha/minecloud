@@ -38,7 +38,7 @@ export default function FileList({
           className=" rounded-[50%]"
         />
 
-        <p className="text-sm font-semibold w-[75%] overflow-x-hidden text-[rgba(0,0,0,0.8)]">
+        <p className="text-sm font-semibold w-[75%] overflow-x-hidden overflow-y-hidden h-5 self-center text-[rgba(0,0,0,0.8)]">
           {item.name}
         </p>
       </div>

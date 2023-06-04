@@ -20,7 +20,7 @@ export default function SideBar({ left, onClick }: any) {
   return (
     <div
       style={{ left: left }}
-      className="w-[215px] h-[77vh] duration-300 max-[670px]:absolute max-[670px]:z-50 bg-white rounded-lg border border-solid border-[rgba(0,0,0,0.1)] flex flex-col justify-between p-[15px]"
+      className="w-[215px] h-[80vh] max-[670px]:h-[77vh] duration-300 max-[670px]:absolute max-[670px]:z-50 bg-white rounded-lg border border-solid border-[rgba(0,0,0,0.1)] flex flex-col justify-between p-[15px]"
     >
       <div className="w-full flex flex-col gap-1">
         <div className=" gap-[5px] w-[215px] max-[670px]:flex hidden pb-2 items-center">
