@@ -9,12 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faArrowRightFromBracket,
+  faSliders,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faAddressBook } from "@fortawesome/free-regular-svg-icons";
 import Loading from "./loading";
 import LogOutModal from "./logOutModal";
 
-export default function NavBar() {
+export default function NavBar({ onClick }: any) {
   const pathname = usePathname();
   const router = useRouter();
   const [userDetails, setUserDetails]: any = useState(null);
@@ -80,11 +81,17 @@ export default function NavBar() {
       )}
       <nav className="w-full flex justify-between items-center">
         <div className="flex gap-6">
-          <div className="flex gap-[5px] w-[215px]">
+          <div className="flex gap-[5px] w-[215px] max-[670px]:hidden">
             <Logo />
             <p className="font-medium">minecloud</p>
           </div>
-          <div className="flex gap-1">
+          <div className="hidden max-[670px]:block" onClick={onClick}>
+            <FontAwesomeIcon
+              icon={faSliders}
+              className="w-4 h-4 text-[rgba(0,0,0,0.9)] cursor-pointer"
+            />
+          </div>
+          <div className="flex gap-1 max-[770px]:hidden">
             {navLinks.map((item) => {
               return (
                 <Link
@@ -142,9 +149,9 @@ export default function NavBar() {
               </div>
               <div
                 style={{ clipPath: clip }}
-                className="absolute duration-500 top-[40px] right-0 w-[220px] h-auto bg-white rounded border border-solid border-[rgba(0,0,0,0.1)] shadow-[1px_1px_3px_rgba(0,0,0,0.1)] p-3"
+                className="absolute duration-500 top-[40px] right-0 w-[220px] h-auto bg-white rounded border border-solid border-[rgba(0,0,0,0.1)] shadow-[1px_1px_3px_rgba(0,0,0,0.1)] pt-3 pb-2"
               >
-                <div className="w-full flex gap-1 items-center ">
+                <div className="w-full flex gap-1 items-center px-3">
                   <div className=" w-[25px] h-[25px] rounded-[50%] cursor-pointer bg-red-300 flex justify-center items-center text-white font-medium text-sm">
                     {userDetails.email[0].toUpperCase()}
                   </div>
@@ -152,14 +159,14 @@ export default function NavBar() {
                     {userDetails.name}
                   </p>
                 </div>
-                <p className="text-xs py-[6px] text-[rgba(0,0,0,0.8)] font-medium ">
+                <p className="text-xs py-[6px] text-[rgba(0,0,0,0.8)] font-medium px-3">
                   Signed In As: {userDetails.email}
                 </p>
                 <div className="flex flex-col w-full">
                   <Link
                     onClick={() => toggleClip()}
                     href={"/favourite&"}
-                    className=" text-xs flex items-center gap-1 py-[9px] pl-[6px] hover:bg-[rgba(0,0,0,0.1)]"
+                    className=" text-xs flex items-center justify-between py-[7px] px-3 hover:bg-[rgba(0,0,0,0.1)]"
                   >
                     Favourite Files
                     <FontAwesomeIcon
@@ -170,9 +177,9 @@ export default function NavBar() {
                   <Link
                     onClick={() => toggleClip()}
                     href={"/contact&"}
-                    className=" text-xs flex items-center gap-1 py-[9px] pl-[6px] hover:bg-[rgba(0,0,0,0.1)]"
+                    className=" text-xs flex justify-between items-center py-[7px] px-3 hover:bg-[rgba(0,0,0,0.1)]"
                   >
-                    {"  Developer's Contact"}
+                    Privacy Policy
                     <FontAwesomeIcon
                       icon={faAddressBook}
                       className="w-[10px] h-[10px] text-[rgba(0,0,0,0.8)]"
@@ -183,7 +190,7 @@ export default function NavBar() {
                       toggleClip();
                       setModal(true);
                     }}
-                    className=" text-xs flex items-center gap-[6px] py-[9px] pl-[6px] hover:bg-[rgba(0,0,0,0.1)]"
+                    className=" text-xs flex items-center justify-between py-[7px] px-3 hover:bg-[rgba(0,0,0,0.1)]"
                   >
                     SignOut
                     <FontAwesomeIcon

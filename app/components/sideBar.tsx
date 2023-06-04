@@ -3,8 +3,10 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { usePathname } from "next/navigation";
 import { sideBarLinks } from "./data";
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+import Logo from "./logo";
 
-export default function SideBar() {
+export default function SideBar({ left, onClick }: any) {
   const pathname = usePathname();
 
   const checkPath = (path: any) => {
@@ -16,11 +18,19 @@ export default function SideBar() {
   };
 
   return (
-    <div className="w-[215px] h-[80vh] bg-white rounded-lg border border-solid border-[rgba(0,0,0,0.1)] flex flex-col justify-between p-[15px]">
+    <div
+      style={{ left: left }}
+      className="w-[215px] h-[85vh] duration-500 max-[670px]:absolute bg-white rounded-lg border border-solid border-[rgba(0,0,0,0.1)] flex flex-col justify-between p-[15px]"
+    >
       <div className="w-full flex flex-col gap-1">
+        <div className=" gap-[5px] w-[215px] max-[670px]:flex hidden pb-2 items-center">
+          <Logo />
+          <p className="font-medium text-sm pt-2">minecloud</p>
+        </div>
         {sideBarLinks.map((item) => {
           return (
             <Link
+              onClick={onClick}
               href={item.path}
               key={item.name}
               className="p-[8px] flex justify-between items-center rounded"
@@ -51,6 +61,27 @@ export default function SideBar() {
             </Link>
           );
         })}
+        <Link
+          onClick={onClick}
+          href={"/contact&"}
+          className="p-[8px] max-[770px]:flex justify-between items-center rounded hidden"
+          style={{
+            color: `${
+              checkPath("/contact&") ? "rgb(29,78,216)" : "rgba(0,0,0,0.89)"
+            }`,
+            backgroundColor: `${
+              checkPath("/contact&") ? "rgba(125,211,252,0.2)" : "transparent"
+            }`,
+          }}
+        >
+          <div className="flex gap-2 items-center">
+            <FontAwesomeIcon
+              icon={faCircleUser}
+              className="text-inherit w-[14px] h-[14px]"
+            />
+            <p className="text-sm ">Privacy Policy</p>
+          </div>
+        </Link>
       </div>
     </div>
   );
