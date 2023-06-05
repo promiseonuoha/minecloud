@@ -1,22 +1,21 @@
-"use client";
-import { useState, useEffect } from "react";
-import "./globals.css";
-import { Inter } from "next/font/google";
-import NavBar from "./components/navBar";
-import SideBar from "./components/sideBar";
+'use client';
+import { useState } from 'react';
+import './globals.css';
+import { Inter } from 'next/font/google';
+import NavBar from './components/navBar';
+import SideBar from './components/sideBar';
+import { account } from '../lib/appwriteConfig';
+import Signin from './components/signIn';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [left, setLeft] = useState("-100%");
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const hasAccount = await account.get();
+  const [left, setLeft] = useState('-100%');
   const toggleLeft = () => {
-    left === "-100%" ? setLeft("20px") : setLeft("-100%");
+    left === '-100%' ? setLeft('20px') : setLeft('-100%');
   };
-
+  console.log(hasAccount);
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -26,9 +25,7 @@ export default function RootLayout({
           <NavBar onClick={toggleLeft} />
           <section className="w-full pt-4 flex gap-6">
             <SideBar onClick={toggleLeft} left={left} />
-            <div className="w-[calc(100%-239px)] max-[670px]:w-full h-[80vh]">
-              {children}
-            </div>
+            <div className="w-[calc(100%-239px)] max-[670px]:w-full h-[80vh]">{hasAccount ? children : <Signin />}</div>
           </section>
         </main>
       </body>

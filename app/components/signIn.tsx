@@ -1,17 +1,17 @@
-"use client";
-import { account } from "../appwrite/appwriteConfig";
-import Image from "next/image";
-import Label from "./label";
-import { useState, useEffect } from "react";
+'use client';
+import { account } from '../../lib/appwriteConfig';
+import Image from 'next/image';
+import Label from './label';
+import { useState, useEffect } from 'react';
 
 export default function Signin() {
-  const [route, setRoute] = useState("SignIn");
-  const [left, setLeft] = useState("8.5px");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [border, setBorder] = useState("1px solid rgba(0,0,0,0.1)");
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
+  const [route, setRoute] = useState('SignIn');
+  const [left, setLeft] = useState('8.5px');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [border, setBorder] = useState('1px solid rgba(0,0,0,0.1)');
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [nameValue, setNameValue] = useState('');
 
   const handleLogin = (e: any) => {
     e.preventDefault();
@@ -21,45 +21,40 @@ export default function Signin() {
       () => window.location.reload(),
       (err) => {
         setErrorMessage(err.message);
-        setBorder("1px solid red");
-      }
+        setBorder('1px solid red');
+      },
     );
   };
 
   const handleSignUp = (e: any) => {
     e.preventDefault();
-    const promise = account.create(
-      crypto.randomUUID(),
-      emailValue,
-      passwordValue,
-      nameValue
-    );
+    const promise = account.create(crypto.randomUUID(), emailValue, passwordValue, nameValue);
 
     promise.then(
       () => {
-        setRoute("SignIn");
+        setRoute('SignIn');
       },
       (err) => {
         setErrorMessage(err.message);
-        setBorder("1px solid red");
-      }
+        setBorder('1px solid red');
+      },
     );
   };
 
   useEffect(() => {
-    setBorder("1px solid rgba(0,0,0,0.1)");
-    setErrorMessage("");
+    setBorder('1px solid rgba(0,0,0,0.1)');
+    setErrorMessage('');
   }, [emailValue, passwordValue]);
 
   useEffect(() => {
     setTimeout(() => {
-      route === "SignIn" ? setLeft("8.5px") : setLeft("53%");
+      route === 'SignIn' ? setLeft('8.5px') : setLeft('53%');
     }, 50);
-    setErrorMessage("");
-    setEmailValue("");
-    setPasswordValue("");
-    setNameValue("");
-    setBorder("1px solid rgba(0,0,0,0.1");
+    setErrorMessage('');
+    setEmailValue('');
+    setPasswordValue('');
+    setNameValue('');
+    setBorder('1px solid rgba(0,0,0,0.1');
   }, [route]);
 
   const UserEmail = (
@@ -113,9 +108,7 @@ export default function Signin() {
   return (
     <div className="w-screen h-screen absolute bg-[rgba(0,0,0,0.5)] top-0 left-0 flex justify-center items-center">
       <div className="w-[330px] h-auto min-h-[360px]  bg-white rounded border border-solid items-center border-[rgba(0,0,0,0.1)] py-4 px-5 flex flex-col">
-        <p className="text-[13px] text-[rgba(0,0,0,0.8)] font-medium pb-3">
-          👋 Welcome, SignIn to use MineCloud
-        </p>
+        <p className="text-[13px] text-[rgba(0,0,0,0.8)] font-medium pb-3">👋 Welcome, SignIn to use MineCloud</p>
         <div className="w-full flex pb-2 relative justify-between">
           <div
             style={{
@@ -124,30 +117,24 @@ export default function Signin() {
             className="w-5/12 bg-[rgba(0,0,0,0.5)] h-[1px] rounded absolute bottom-1 duration-150  "
           ></div>
           <p
-            onClick={() => setRoute("SignIn")}
+            onClick={() => setRoute('SignIn')}
             className="text-[13px] text-[rgba(0,0,0,0.8)]   w-6/12 text-center font-medium cursor-pointer"
           >
             SignIn
           </p>
           <p
-            onClick={() => setRoute("SignUp")}
+            onClick={() => setRoute('SignUp')}
             className="text-[13px] text-[rgba(0,0,0,0.8)]  w-6/12   text-center font-medium cursor-pointer"
           >
             SignUp
           </p>
         </div>
-        {route === "SignIn" && (
-          <form
-            method="post"
-            action={""}
-            className="py-2 w-full flex flex-col gap-[8px]"
-          >
+        {route === 'SignIn' && (
+          <form method="post" action={''} className="py-2 w-full flex flex-col gap-[8px]">
             {UserEmail}
             {UserPassword}
 
-            {errorMessage !== "" && (
-              <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
-            )}
+            {errorMessage !== '' && <p className="text-xs text-red-600 font-medium">{errorMessage}</p>}
             <button
               onClick={handleLogin}
               type="submit"
@@ -157,19 +144,13 @@ export default function Signin() {
             </button>
           </form>
         )}
-        {route === "SignUp" && (
-          <form
-            method="post"
-            action={""}
-            className="py-2 w-full flex flex-col gap-[8px]"
-          >
+        {route === 'SignUp' && (
+          <form method="post" action={''} className="py-2 w-full flex flex-col gap-[8px]">
             {UserName}
             {UserEmail}
             {UserPassword}
 
-            {errorMessage !== "" && (
-              <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
-            )}
+            {errorMessage !== '' && <p className="text-xs text-red-600 font-medium">{errorMessage}</p>}
             <button
               onClick={handleSignUp}
               type="submit"
@@ -180,26 +161,15 @@ export default function Signin() {
           </form>
         )}
         <div className="pt-1 w-full border-t border-solid border-[rgba(0,0,0,0.1)] flex flex-col gap-1 ">
-          <p className="text-[13px] text-[rgba(0,0,0,0.5)] font-medium text-center">
-            OR
-          </p>
+          <p className="text-[13px] text-[rgba(0,0,0,0.5)] font-medium text-center">OR</p>
           <button
             onClick={() => {
-              account.createOAuth2Session(
-                "google",
-                "https://minecloud.vercel.app/",
-                "https://minecloud.vercel.app/"
-              );
+              account.createOAuth2Session('google', 'https://minecloud.vercel.app/', 'https://minecloud.vercel.app/');
             }}
             className="flex justify-center items-center text-[13px] text-white bg-[rgba(0,0,0,0.6)] gap-1  px-4 py-2 rounded"
           >
             SignIn with google
-            <Image
-              src={"/images/google.png"}
-              alt="Google Icon"
-              width={18}
-              height={18}
-            />
+            <Image src={'/images/google.png'} alt="Google Icon" width={18} height={18} />
           </button>
         </div>
       </div>
