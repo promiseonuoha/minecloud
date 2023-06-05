@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
 import { storage } from "../appwrite/appwriteConfig";
@@ -67,7 +67,7 @@ export default function FileList({
               Open File
             </button>
             <button
-              className="w-full border-none bg-transparent py-[6px] text-left hover:bg-[rgba(0,0,0,0.1)] px-3 text-xs font-medium text-[rgba(0,0,0,0.8)]"
+              className="w-full border-none flex justify-between bg-transparent py-[6px] text-left hover:bg-[rgba(0,0,0,0.1)] px-3 text-xs font-medium text-[rgba(0,0,0,0.8)]"
               onClick={() => {
                 toggleFileMenu(item.id);
                 const promise = storage.getFileDownload(
@@ -78,6 +78,10 @@ export default function FileList({
               }}
             >
               Download File
+              <FontAwesomeIcon
+                icon={faDownload}
+                className="w-3 h-3 text-[rgba(0,0,0,0.8)]"
+              />
             </button>
 
             <button
