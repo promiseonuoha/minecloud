@@ -11,19 +11,19 @@ export default function SideBar({ left, onClick }: any) {
 
   const checkPath = (path: any) => {
     let value = true;
-    if (path === "/contact&" && pathname === "/contact&") return value;
-    if (path === "/favourite&" && pathname === "/favourite&") return value;
-    if (path === "/" && pathname !== "/contact&" && pathname !== "/favourite&")
+    if (path === "/contact" && pathname === "/contact") return value;
+    if (path === "/favourite" && pathname === "/favourite") return value;
+    if (path === "/" && pathname !== "/contact" && pathname !== "/favourite")
       return value;
   };
 
   return (
     <div
       style={{ left: left }}
-      className="w-[215px] h-[80vh] max-[670px]:h-[77vh] duration-300 max-[670px]:absolute max-[670px]:z-50 bg-white rounded-lg border border-solid border-[rgba(0,0,0,0.1)] flex flex-col justify-between p-[15px]"
+      className="w-twoFifteen h-[80vh] max-[670px]:h-[77vh] duration-300 max-[670px]:absolute max-[670px]:z-50 bg-white rounded-lg border border-solid border-black/10 flex flex-col justify-between p-3.5"
     >
       <div className="w-full flex flex-col gap-1">
-        <div className=" gap-[5px] w-[215px] max-[670px]:flex hidden pb-2 items-center">
+        <div className=" gap-1.5 w-twoFifteen max-[670px]:flex hidden pb-2 items-center">
           <Logo />
           <p className="font-medium text-sm pt-2">minecloud</p>
         </div>
@@ -46,7 +46,7 @@ export default function SideBar({ left, onClick }: any) {
               <div className="flex gap-2 items-center">
                 <FontAwesomeIcon
                   icon={item.icon}
-                  className="text-inherit w-[14px] h-[14px]"
+                  className="text-inherit w-3.5 h-3.5"
                 />
                 <p className="text-sm ">{item.name}</p>
               </div>
@@ -54,7 +54,7 @@ export default function SideBar({ left, onClick }: any) {
                 <div className="flex items-center">
                   <FontAwesomeIcon
                     icon={item.iconTwo}
-                    className="w-3 h-3 text-[rgba(0,0,0,0.7)]"
+                    className="w-3 h-3 text-black/70"
                   />
                 </div>
               )}
@@ -77,7 +77,7 @@ export default function SideBar({ left, onClick }: any) {
           <div className="flex gap-2 items-center">
             <FontAwesomeIcon
               icon={faCircleUser}
-              className="text-inherit w-[14px] h-[14px]"
+              className="text-inherit w-3.5 h-3.5"
             />
             <p className="text-sm ">Privacy Policy</p>
           </div>

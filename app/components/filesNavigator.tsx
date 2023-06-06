@@ -7,21 +7,17 @@ export default function FilesNavator() {
   return (
     <div
       id="filesNavigator"
-      className="w-[70%] overflow-x-hidden max-[770px]:w-[50%]"
+      className="w-seventyPercent overflow-x-hidden max-[770px]:w-6/12"
     >
       <div className=" flex gap-1">
-        <Link href={"/"} className="text-sm text-[rgba(0,0,0,0.8)]">
+        <Link href={"/"} className="text-sm text-black/80">
           Home
         </Link>
         {pathname
           .split("/")
           .filter((x) => x !== "")
           .map((a) => (
-            <Link
-              href={`/${a}`}
-              key={a}
-              className="text-sm text-[rgba(0,0,0,0.8)]"
-            >
+            <Link href={`/${a}`} key={a} className="text-sm text-black/80">
               / {a}
             </Link>
           ))}
