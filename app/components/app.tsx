@@ -6,7 +6,7 @@ import FileModal from "./fileModal";
 import QuickAccess from "./quickAccess";
 import FolderModal from "./folderModal";
 import FilesNavator from "./filesNavigator";
-
+import config from "@/config";
 import { usePathname } from "next/navigation";
 import Loading from "./loading";
 import FileList from "./fileList";
@@ -20,7 +20,7 @@ import {
   creatingFolder,
   addFile,
   deleteBucketFile,
-} from "../../lib/appwriteConfig";
+} from "@/lib/appwriteConfig";
 
 export default function Home() {
   const [fileDropDown, setFileDropDown] = useState(false);
@@ -35,8 +35,8 @@ export default function Home() {
 
   const listDocuments = (email: string) => {
     const promise = databases.listDocuments(
-      "64748082e458885cc1dd",
-      "64748089ef99c41ad0b2"
+      config.databaseId,
+      config.collectionId
     );
     promise.then(
       (res) => {
@@ -81,7 +81,7 @@ export default function Home() {
     }
     for (const item of file) {
       try {
-        await storage.deleteFile("64748172a5b0bd8409dd", item.$id);
+        await storage.deleteFile(config.bucketId, item.$id);
         await deleteDocument(item.$id);
       } catch {
         console.log("error");
@@ -94,8 +94,8 @@ export default function Home() {
     let folders: any;
     let files: any;
     const promise = databases.listDocuments(
-      "64748082e458885cc1dd",
-      "64748089ef99c41ad0b2"
+      config.databaseId,
+      config.collectionId
     );
 
     promise
@@ -146,7 +146,7 @@ export default function Home() {
       userDetails.email
     ).then(
       () => listDocuments(userDetails.email),
-      (err) => {
+      (err: any) => {
         console.log(err);
         setLoading(false);
       }
@@ -178,13 +178,12 @@ export default function Home() {
             name: item.file[1],
             id: item.file[0],
             imageURL: storage.getFilePreview(
-              "64748172a5b0bd8409dd",
+              config.bucketId,
               item.file[0],
               28,
               28
             ).href,
-            link: storage.getFileView("64748172a5b0bd8409dd", item.file[0])
-              .href,
+            link: storage.getFileView(config.bucketId, item.file[0]).href,
             isFavourite: item.file[3],
           },
         ]);

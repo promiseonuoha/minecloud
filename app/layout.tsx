@@ -1,25 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import NavBar from "./components/navBar";
 import SideBar from "./components/sideBar";
-import { account } from "../lib/appwriteConfig";
+import { account } from "@/lib/appwriteConfig";
 import Signin from "./components/signIn";
-
 const inter = Inter({ subsets: ["latin"] });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hasAccount = await account.get();
+  const [hasAccount, setHasAccount] = useState(true);
   const [left, setLeft] = useState("-100%");
   const toggleLeft = () => {
     left === "-100%" ? setLeft("20px") : setLeft("-100%");
   };
-  console.log(hasAccount);
+  useEffect(() => {
+    const userAccount = account.get();
+    userAccount.then(
+      () => setHasAccount(true),
+      (err) => {
+        console.log(err);
+        setHasAccount(false);
+      }
+    );
+  }, []);
   return (
     <html lang="en">
       <body className={inter.className}>

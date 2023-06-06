@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder, faFile } from "@fortawesome/free-regular-svg-icons";
 import { storage } from "@/lib/appwriteConfig";
+import config from "@/config";
 
 export default function FileModal({
   choosedFile,
@@ -16,7 +17,7 @@ export default function FileModal({
   const handleFile = (e: any) => {
     loading();
     const promise = storage.createFile(
-      "64748172a5b0bd8409dd",
+      config.bucketId,
       crypto.randomUUID(),
       e.target.files[0]
     );

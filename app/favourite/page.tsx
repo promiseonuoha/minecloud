@@ -4,7 +4,7 @@ import Loading from "@/app/components/loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import QuickAccess from "@/app/components/quickAccess";
-import { databases, storage, account } from "../../lib/appwriteConfig";
+import { databases, storage, account } from "@/lib/appwriteConfig";
 import FileList from "@/app/components/fileList";
 
 export default function Page() {

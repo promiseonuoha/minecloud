@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { databases } from "../../lib/appwriteConfig";
+import { databases } from "@/lib/appwriteConfig";
+import config from "@/config";
 
 export default function QuickAccess({ changed, email }: any) {
   const [allFolders, setAllFolders]: any = useState(null);
@@ -11,8 +12,8 @@ export default function QuickAccess({ changed, email }: any) {
   const listFolders = () => {
     setAllFolders([]);
     const promise = databases.listDocuments(
-      "64748082e458885cc1dd",
-      "64748089ef99c41ad0b2"
+      config.databaseId,
+      config.collectionId
     );
     promise.then(
       (response: any) =>

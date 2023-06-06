@@ -157,7 +157,7 @@ export default function NavBar({ onClick }: any) {
             <div className="relative">
               <div
                 onClick={toggleClip}
-                className="self-center w-h-9 h-9 rounded-[50%] cursor-pointer bg-red-300 flex justify-center items-center text-white font-medium text-base"
+                className="self-center w-9  h-9 rounded-[50%] cursor-pointer bg-red-300 flex justify-center items-center text-white font-medium text-base"
               >
                 {userDetails.email[0].toUpperCase()}
               </div>

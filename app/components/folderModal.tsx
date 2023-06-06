@@ -1,7 +1,8 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { databases } from "../../lib/appwriteConfig";
+import { databases } from "@/lib/appwriteConfig";
 import { useState, useEffect } from "react";
+import config from "@/config";
 
 export default function FolderModal({ createFolder, canceled, email }: any) {
   const [folderName, setFolderName] = useState("");
@@ -56,8 +57,8 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
 
   useEffect(() => {
     const promise = databases.listDocuments(
-      "64748082e458885cc1dd",
-      "64748089ef99c41ad0b2"
+      config.databaseId,
+      config.collectionId
     );
     promise.then(
       (response) =>

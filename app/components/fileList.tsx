@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
-import { storage } from "../../lib/appwriteConfig";
+import { storage } from "@/lib/appwriteConfig";
+import config from "@/config";
 
 export default function FileList({
   item,
@@ -71,7 +72,7 @@ export default function FileList({
               onClick={() => {
                 toggleFileMenu(item.id);
                 const promise = storage.getFileDownload(
-                  "64748172a5b0bd8409dd",
+                  config.bucketId,
                   item.id
                 );
                 window.open(promise.href, "_blank");

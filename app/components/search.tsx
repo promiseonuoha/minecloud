@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { databases, storage } from "../../lib/appwriteConfig";
+import config from "@/config";
+import { databases, storage } from "@/lib/appwriteConfig";
 
 export default function Search({ value, email }: any) {
   const [data, setData]: any = useState(null);
@@ -10,8 +11,8 @@ export default function Search({ value, email }: any) {
 
   useEffect(() => {
     const promise = databases.listDocuments(
-      "64748082e458885cc1dd",
-      "64748089ef99c41ad0b2"
+      config.databaseId,
+      config.collectionId
     );
 
     promise.then(
@@ -39,13 +40,12 @@ export default function Search({ value, email }: any) {
                 name: item.file[1],
                 id: item.file[0],
                 imageURL: storage.getFilePreview(
-                  "64748172a5b0bd8409dd",
+                  config.bucketId,
                   item.file[0],
                   28,
                   28
                 ).href,
-                link: storage.getFileView("64748172a5b0bd8409dd", item.file[0])
-                  .href,
+                link: storage.getFileView(config.bucketId, item.file[0]).href,
                 isFavourite: item.file[3],
               },
             ]);

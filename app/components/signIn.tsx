@@ -1,5 +1,5 @@
 "use client";
-import { account } from "../../lib/appwriteConfig";
+import { account } from "@/lib/appwriteConfig";
 import Image from "next/image";
 import Label from "./label";
 import { useState, useEffect } from "react";
