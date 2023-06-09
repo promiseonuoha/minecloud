@@ -43,6 +43,7 @@ export default function NavBar({ onClick }: any) {
             window.location.reload();
           } else {
             router.push("/");
+            window.location.reload();
             setLoading(false);
           }
         },
