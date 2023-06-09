@@ -180,7 +180,7 @@ export default function NavBar({ onClick }: any) {
                 <div className="flex flex-col w-full">
                   <Link
                     onClick={() => toggleClip()}
-                    href={"/favourite&"}
+                    href={"/favourite"}
                     className=" text-xs flex items-center justify-between py-1.5 px-3 hover:bg-black/10"
                   >
                     Favourite Files
@@ -191,7 +191,7 @@ export default function NavBar({ onClick }: any) {
                   </Link>
                   <Link
                     onClick={() => toggleClip()}
-                    href={"/contact&"}
+                    href={"/about"}
                     className=" text-xs flex justify-between items-center py-1.5 px-3 hover:bg-black/10"
                   >
                     About
