@@ -50,11 +50,10 @@ export default function Home() {
             return v.file[2] === pathname && v.file[4] === email;
           })
         );
-        setChanged(Math.random());
+
         setLoading(false);
       },
       (err) => {
-        setChanged(Math.random());
         setLoading(false);
         console.log(err);
       }
@@ -62,12 +61,14 @@ export default function Home() {
   };
 
   const deleteFile = async (id: string) => {
+    setLoading(true);
     try {
       await deleteBucketFile(id);
       await deleteDocument(id);
       listDocuments(userDetails.email);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -122,6 +123,7 @@ export default function Home() {
         deleteChildren(folders, files).then(() => {
           deleteDocument(id).then(
             () => {
+              setChanged(Math.random());
               listDocuments(userDetails.email);
               setLoading(false);
             },
@@ -200,9 +202,9 @@ export default function Home() {
             setLoading(true);
             creatingFolder(name, pathname, userDetails.email).then(
               () => {
+                setChanged(Math.random());
                 setLoading(false);
                 listDocuments(userDetails.email);
-                setChanged(Math.random());
               },
               () => setLoading(false)
             );

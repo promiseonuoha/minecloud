@@ -12,8 +12,8 @@ export const navLinks = [
     icon: faFolderClosed,
   },
   {
-    name: "Contact",
-    path: "/contact",
+    name: "About",
+    path: "/about",
     icon: faCircleUser,
   },
 ];

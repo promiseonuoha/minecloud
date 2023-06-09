@@ -28,8 +28,8 @@ export default function NavBar({ onClick }: any) {
 
   const checkPath = (path: any) => {
     let value = true;
-    if (path === "/contact" && pathname === "/contact") return value;
-    if (path === "/" && pathname !== "/contact") return value;
+    if (path === "/about" && pathname === "/about") return value;
+    if (path === "/" && pathname !== "/about") return value;
   };
 
   const handleLogout = () => {
@@ -193,7 +193,7 @@ export default function NavBar({ onClick }: any) {
                     href={"/contact&"}
                     className=" text-xs flex justify-between items-center py-1.5 px-3 hover:bg-black/10"
                   >
-                    Privacy Policy
+                    About
                     <FontAwesomeIcon
                       icon={faAddressBook}
                       className="w-2.5 h-2.5 text-black/80"

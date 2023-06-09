@@ -35,6 +35,12 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
       setError("Folder already exist");
       return;
     }
+    for (let character of ["contact", "favourite"]) {
+      if (folderName === character) {
+        setError(`Update the name ${folderName}`);
+        return;
+      }
+    }
     for (let a of folderName) {
       if (a !== " ") {
         myString += a;

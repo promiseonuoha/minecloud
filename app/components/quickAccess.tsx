@@ -10,18 +10,18 @@ export default function QuickAccess({ changed, email }: any) {
   const [allFolders, setAllFolders]: any = useState(null);
 
   const listFolders = () => {
-    setAllFolders([]);
     const promise = databases.listDocuments(
       config.databaseId,
       config.collectionId
     );
     promise.then(
-      (response: any) =>
+      (response: any) => {
         setAllFolders(
           response.documents.filter(
             (item: any) => item.folder[1] === "/" && item.folder[2] === email
           )
-        ),
+        );
+      },
       (err: any) => console.log(err)
     );
   };

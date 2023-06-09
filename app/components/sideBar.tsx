@@ -11,9 +11,9 @@ export default function SideBar({ left, onClick }: any) {
 
   const checkPath = (path: any) => {
     let value = true;
-    if (path === "/contact" && pathname === "/contact") return value;
+    if (path === "/about" && pathname === "/about") return value;
     if (path === "/favourite" && pathname === "/favourite") return value;
-    if (path === "/" && pathname !== "/contact" && pathname !== "/favourite")
+    if (path === "/" && pathname !== "/about" && pathname !== "/favourite")
       return value;
   };
 
@@ -63,14 +63,14 @@ export default function SideBar({ left, onClick }: any) {
         })}
         <Link
           onClick={onClick}
-          href={"/contact&"}
+          href={"/about"}
           className="p-[8px] max-[770px]:flex justify-between items-center rounded hidden"
           style={{
             color: `${
-              checkPath("/contact&") ? "rgb(29,78,216)" : "rgba(0,0,0,0.89)"
+              checkPath("/about") ? "rgb(29,78,216)" : "rgba(0,0,0,0.89)"
             }`,
             backgroundColor: `${
-              checkPath("/contact&") ? "rgba(125,211,252,0.2)" : "transparent"
+              checkPath("/about") ? "rgba(125,211,252,0.2)" : "transparent"
             }`,
           }}
         >
@@ -79,7 +79,7 @@ export default function SideBar({ left, onClick }: any) {
               icon={faCircleUser}
               className="text-inherit w-3.5 h-3.5"
             />
-            <p className="text-sm ">Privacy Policy</p>
+            <p className="text-sm ">About</p>
           </div>
         </Link>
       </div>
