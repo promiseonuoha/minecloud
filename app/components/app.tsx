@@ -133,7 +133,7 @@ export default function Home() {
       );
   };
 
-  const clickedFavourite = (
+  const toggleFavourite = (
     type: string,
     id: string,
     name: string,
@@ -285,8 +285,8 @@ export default function Home() {
                     item={item}
                     key={item.id}
                     trash={(id: string) => deleteFile(id)}
-                    clickedFavourite={() =>
-                      clickedFavourite(
+                    toggleFavourite={() =>
+                      toggleFavourite(
                         item.isFavourite,
                         item.id,
                         item.name,

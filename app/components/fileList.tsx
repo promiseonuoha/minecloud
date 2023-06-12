@@ -8,7 +8,7 @@ import config from "@/config";
 export default function FileList({
   item,
   trash,
-  clickedFavourite,
+  toggleFavourite,
   inFavourite,
 }: any) {
   const toggleFileMenu = (id: string) => {
@@ -20,6 +20,43 @@ export default function FileList({
       element.style.display = "none";
     }
   };
+
+  //Drop down buttons Link
+  const buttons: any = [
+    {
+      name: "Open File",
+      clickEvent: () => {
+        toggleFileMenu(item.id);
+        window.open(item.link, "_blank");
+      },
+      icon: null,
+    },
+    {
+      name: "Download File",
+      clickEvent: () => {
+        toggleFileMenu(item.id);
+        const promise = storage.getFileDownload(config.bucketId, item.id);
+        window.open(promise.href, "_blank");
+      },
+      icon: faDownload,
+    },
+    {
+      name: "Delete File",
+      clickEvent: () => {
+        trash(item.id);
+        toggleFileMenu(item.id);
+      },
+      icon: faTrashCan,
+    },
+    {
+      name:
+        item.isFavourite === "Yes"
+          ? "Remove from Favourite"
+          : "Add to favourite",
+      clickEvent: toggleFavourite,
+      icon: faHeart,
+    },
+  ];
 
   const imageLoader = () => {
     return `${item.imageURL}`;
@@ -58,58 +95,23 @@ export default function FileList({
             id={item.id}
             className="absolute right-0 z-50 top-[30px] bg-white border border-solid border-black/10 w-44 h-auto rounded shadow-[0px_1px_2px_black/10] flex flex-col"
           >
-            <button
-              className="w-full border-none bg-transparent py-1.5 text-left hover:bg-black/10 px-3 text-xs font-medium text-black/80"
-              onClick={() => {
-                toggleFileMenu(item.id);
-                window.open(item.link, "_blank");
-              }}
-            >
-              Open File
-            </button>
-            <button
-              className="w-full border-none flex justify-between bg-transparent py-1.5 text-left hover:bg-black/10 px-3 text-xs font-medium text-black/80"
-              onClick={() => {
-                toggleFileMenu(item.id);
-                const promise = storage.getFileDownload(
-                  config.bucketId,
-                  item.id
-                );
-                window.open(promise.href, "_blank");
-              }}
-            >
-              Download File
-              <FontAwesomeIcon
-                icon={faDownload}
-                className="w-3 h-3 text-black/80"
-              />
-            </button>
-
-            <button
-              className="w-full border-none flex justify-between bg-transparent py-1.5 text-left hover:bg-black/10 px-3 text-xs font-medium text-black/80"
-              onClick={() => {
-                trash(item.id);
-                toggleFileMenu(item.id);
-              }}
-            >
-              Delete File
-              <FontAwesomeIcon
-                icon={faTrashCan}
-                className="w-3 h-3 text-black/80"
-              />
-            </button>
-            <button
-              onClick={clickedFavourite}
-              className="w-full border-none flex justify-between items-center bg-transparent py-1.5 text-left hover:bg-black/10 px-3 text-xs font-medium text-black/80"
-            >
-              {item.isFavourite === "Yes"
-                ? "Remove from Favourite"
-                : "Add to favourite"}
-              <FontAwesomeIcon
-                icon={faHeart}
-                className="w-3 h-3 text-black/80"
-              />
-            </button>
+            {buttons.map((button: any) => {
+              return (
+                <button
+                  key={button.name}
+                  onClick={button.clickEvent}
+                  className="w-full border-none flex justify-between items-center bg-transparent py-1.5 text-left hover:bg-black/10 px-3 text-xs font-medium text-black/80"
+                >
+                  {button.name}
+                  {button.icon && (
+                    <FontAwesomeIcon
+                      icon={button.icon}
+                      className="w-3 h-3 text-black/80"
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
