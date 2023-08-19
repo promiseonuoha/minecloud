@@ -12,8 +12,7 @@ export default function FileModal({
   stopLoading,
 }: any) {
   const [bg, setBg] = useState("transparent");
-  const [opacity, setOpacity] = useState(0);
-  const [transform, setTransform] = useState("translateY(30px)");
+  const [opacity, setOpacity] = useState(0)
   const handleFile = (e: any) => {
     loading();
     const promise = storage.createFile(
@@ -30,13 +29,12 @@ export default function FileModal({
   };
 
   useEffect(() => {
-    setOpacity(1);
-    setTransform("translateY(0px)");
+    setOpacity(1);  
   }, []);
 
   return (
     <div
-      style={{ opacity: opacity, transform: transform }}
+      style={{ opacity: opacity }}
       className="absolute duration-700 top-10 z-40 shadow-[0px_0px_1px_black/10] bg-white rounded right-0 flex flex-col gap-1 w-40 border border-solid border-black/10"
     >
       <div className="relative">
