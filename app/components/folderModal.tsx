@@ -9,7 +9,6 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
   const [error, setError]: any = useState("");
   const invalidCharacters = "!@#$%^&*()";
   const [sibilings, setSiblings]: any = useState([]);
-  const [transform, setTransform] = useState("translateY(-8px)");
   const [opacity, setOpacity] = useState(0);
   const pathname = usePathname();
 
@@ -56,9 +55,6 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
 
   useEffect(() => {
     setOpacity(1);
-    setTimeout(() => {
-      setTransform("translateY(0px)");
-    }, 300);
   }, []);
 
   useEffect(() => {
@@ -80,7 +76,7 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
   return (
     <div className="w-full z-50 h-screen absolute top-0 left-0 flex justify-center items-center bg-black/10">
       <div
-        style={{ transform: transform, opacity: opacity }}
+        style={{ opacity: opacity }}
         className="flex flex-col gap-2 duration-700 rounded bg-white w-[250px] p-3"
       >
         <p className="text-xs text-black/80 font-medium">Folder Name</p>
@@ -102,13 +98,13 @@ export default function FolderModal({ createFolder, canceled, email }: any) {
               setFolderName("");
               canceled();
             }}
-            className="w-fourtyEightPercent py-2 border border-solid hover:scale-105 border-black/10 text-black/80 text-xs rounded"
+            className="w-fourtyEightPercent py-2.5 border border-solid hover:scale-105 border-black/10 text-black/80 text-xs rounded"
           >
             Cancel
           </button>
           <button
             onClick={handleCreateFolder}
-            className="w-fourtyEightPercent py-2 bg-blue-700 hover:scale-105 border-none text-white text-xs rounded"
+            className="w-fourtyEightPercent py-2.5 bg-blue-700 hover:scale-105 border-none text-white text-xs rounded"
           >
             Create
           </button>
